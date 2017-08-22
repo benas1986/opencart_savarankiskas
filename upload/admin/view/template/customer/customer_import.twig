@@ -1,0 +1,50 @@
+<div>
+    <fieldset> 
+        <legend> {{ text_import }}</legend>
+        <div class="text-left">
+            <a href="{{ import_csv }}" data-toggle="tooltip"  class="btn btn-primary" id="button-upload"><i class="fa fa-save"></i> {{ button_import_add }}</a>
+            <!-- <button type="button" id="button-import" data-loading-text="{{ text_loading }}" class="btn btn-primary"><i class="fa fa-save"></i> {{ button_import_add }}</button> -->
+        </div><br />
+        <div>
+            {% if latest_date != "" %}
+            <p>Latest import: {{ latest_date }}  by <strong> {{ username }} </strong></p><br /> 
+            {% else %}
+            <p>Latest import: {{ text_no_results }} </p><br /> 
+            {% endif %}
+        </div>
+        <div class="table-responsive">
+            <table class="table table-bordered table-hover">
+                <thead>
+                    <tr>
+                        <td class="text-right">{{ column_product_name }}</td>
+                        <td class="text-right">{{ column_product_ean_code }}</td>
+                        <td class="text-right">{{ column_special_price_eur }}</td>
+                        <td class="text-right">{{ column_date_added }}</td>
+                        <td class="text-right">{{ column_action }}</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% if imports %}
+                    {% for import in imports %}
+                    <tr>
+                        <td class="text-right"><a href="{{ import.product_url }}">{{ import.product_name }}</a></td>
+                        <td class="text-right">{{ import.product_ean_code }}</td>
+                        <td class="text-right">{{ import.special_price_eur }}</td>
+                        <td class="text-right">{{ import.date_added }} {{ import.custname }} </td>   
+                        <td class="text-right"><a href="{{ import.edit }}" data-toggle="tooltip" title="{{ button_edit }}" class="btn btn-primary"><i class="fa fa-pencil"></i></a> <a href="{{ import.delete }}" data-toggle="tooltip" title="{{ button_delete }}" class="btn btn-danger"><i class="fa fa-trash-o"></i></a></td>
+                    </tr>
+                    {% endfor %}
+                    {% else %}
+                    <tr>
+                        <td class="text-center" colspan="5">{{ text_no_results }}</td>
+                    </tr>
+                    {% endif %}
+                </tbody>
+            </table>
+        </div>
+        <div class="row">
+            <div class="col-sm-6 text-left">{{ pagination }} </div>
+            <div class="col-sm-6 text-right">{{ results }}</div>
+        </div>
+    </fieldset>        
+</div>

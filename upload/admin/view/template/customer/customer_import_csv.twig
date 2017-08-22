@@ -1,0 +1,45 @@
+{{ header }}{{ column_left }}
+<div id="content">
+    <div class="page-header">
+        <div class="container-fluid">
+            <div class="pull-right">
+                <button type="submit" form="form-import" data-toggle="tooltip" title="{{ button_save }}" class="btn btn-primary"><i class="fa fa-save"></i></button>
+                <a href="{{ cancel }}" data-toggle="tooltip" title="{{ button_cancel }}" class="btn btn-default"><i class="fa fa-reply"></i></a></div>
+            <h1>{{ heading_title }}</h1>
+            <ul class="breadcrumb">
+                {% for breadcrumb in breadcrumbs %}
+                <li><a href="{{ breadcrumb.href }}">{{ breadcrumb.text }}</a></li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+    <div class="container-fluid">
+        <!--
+{% if error_warning %}
+<div class="alert alert-danger alert-dismissible"><i class="fa fa-exclamation-circle"></i> {{ error_warning }}
+<button type="button" class="close" data-dismiss="alert">&times;</button>
+</div>
+{% endif %}
+-->
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title"><i class="fa fa-upload"></i> {{ text_import_csv }}</h3>
+            </div>
+            <div class="panel-body">
+                <form action="" method="post" enctype="multipart/form-data" id="form-import" class="form-horizontal">
+                    <table class="form">
+                        <tr>
+                            <td><input type="file" name="csv" value=""  />
+                                <?php if ($error_csv) { ?>
+                                <span class="error"><?php echo $error_csv; ?></span>
+                                <?php } ?>
+                            </td>
+                            <td><button type="submit" form="form-import" data-toggle="tooltip" title="{{ button_save }}" class="btn btn-primary"><i class="fa fa-save"> Upload </i></button></td>
+                        </tr>
+                    </table>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{{ footer }}
