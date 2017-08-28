@@ -1415,8 +1415,8 @@ class ControllerCustomerCustomer extends Controller {
                 'product_name'          => $this->model_customer_customer->getImportNameByImportId($result['customer_import_id']),
                 'special_price_eur'     => $result['special_price_eur'],
                 'date_added'            => date($this->language->get('datetime_format'), strtotime($result['date_added'])),
-                'product_id'            => $this->model_customer_customer->getProductId($result['product_ean_code']),
-                'product_url'           => $this->url->link('catalog/product/edit', 'user_token=' . $this->session->data['user_token'] . '&product_id=' . $this->model_customer_customer->getProductId($result['product_ean_code']), true),
+                'product_id'            => $this->model_customer_customer->getProductId($result['customer_import_id']),
+                'product_url'           => $this->url->link('catalog/product/edit', 'user_token=' . $this->session->data['user_token'] . '&product_id=' . $this->model_customer_customer->getProductId($result['customer_import_id']), true),
                 'edit'                  => $this->url->link('customer/customer/editImport', 'user_token=' . $this->session->data['user_token']  . '&customer_id=' . $result['customer_id'] .  '&customer_import_id=' . $result['customer_import_id'], true),
                 'delete'                => $this->url->link('customer/customer/deleteImport', 'user_token=' . $this->session->data['user_token'] . '&customer_id=' . $result['customer_id'] . '&customer_import_id=' . $result['customer_import_id'], true),
             );

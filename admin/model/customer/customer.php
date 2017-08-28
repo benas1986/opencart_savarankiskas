@@ -498,8 +498,8 @@ class ModelCustomerCustomer extends Model {
 
     }
 
-    public function getProductId($product_ean_code){
-        $query = $this->db->query("SELECT pr.product_id as product_id FROM (" . DB_PREFIX . "product pr LEFT JOIN " . DB_PREFIX . "product_description pd ON pd.product_id = pr.product_id), (" . DB_PREFIX . "customer_import ci LEFT JOIN " . DB_PREFIX . "product ON " . DB_PREFIX . "product.ean = ci.product_ean_code) WHERE pr.ean = '" . (int)$product_ean_code . "'");
+    public function getProductId($customer_import_id){
+        $query = $this->db->query("SELECT pr.product_id as product_id FROM (oc_product pr LEFT JOIN oc_product_description pd ON pd.product_id = pr.product_id), (oc_customer_import ci LEFT JOIN oc_product ON oc_product.ean = ci.product_ean_code) WHERE pr.ean = ci.product_ean_code AND pd.product_id = pr.product_id AND ci.customer_import_id = '" . (int)$customer_import_id . "'");
 
         if ($query->num_rows) {
             $product_id = $query->row['product_id'];
